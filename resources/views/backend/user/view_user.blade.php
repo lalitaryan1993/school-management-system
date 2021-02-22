@@ -29,6 +29,7 @@
                                    <th>Role</th>
                                    <th>Name</th>
                                    <th>Email</th>
+                                   <th>Code</th>
                                    <th>Action</th>
                                </tr>
                            </thead>
@@ -39,6 +40,7 @@
                                    <td>{{ $user->user_type }}</td>
                                    <td>{{ $user->name }}</td>
                                    <td>{{ $user->email }}</td>
+                                   <td>{{ $user->code }}</td>
                                    <td width="25%">
                                        <a href="{{ route('user.edit', [$user->id])}}" class="btn btn-info">Edit</a>
                                        <a href="{{ route('user.delete', [$user->id])}}" class="btn btn-danger" id="delete">Delete</a>

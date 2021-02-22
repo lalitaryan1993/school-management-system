@@ -17,7 +17,8 @@ class UserController extends Controller
      */
     public function userView()
     {
-        $allData = User::all();
+        // $allData = User::all();
+        $allData = User::where('user_type','Admin')->get();
         return view('backend.user.view_user',compact('allData'));
     }
 
@@ -43,16 +44,19 @@ class UserController extends Controller
             [
                 'email' => 'required|unique:users',
                 'name' => 'required',
-                'name' => 'required',
+                'role' => 'required',
 
             ]
         );
 
         $data = new User();
-        $data->user_type = $request->user_type;
+        $code = rand(0000, 9999);
+        $data->user_type = 'Admin';
+        $data->role = $request->role;
         $data->name = $request->name;
         $data->email = $request->email;
-        $data->password = bcrypt($request->password);
+        $data->password = bcrypt($code);
+        $data->code = $code;
 
         $data->save();
 
@@ -95,9 +99,9 @@ class UserController extends Controller
     {
 
         $data =  User::findOrFail($id);
-        $data->user_type = $request->user_type;
         $data->name = $request->name;
         $data->email = $request->email;
+        $data->role = $request->user_type;
 
         $data->save();
         // dd($request);
