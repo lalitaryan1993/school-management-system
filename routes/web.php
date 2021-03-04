@@ -7,24 +7,31 @@ use App\Http\Controllers\Backend\DefaultController;
 use App\Http\Controllers\Backend\ProfileController;
 use App\Http\Controllers\Backend\Marks\GradeController;
 use App\Http\Controllers\Backend\Marks\MarksController;
+use App\Http\Controllers\Backend\Report\ProfitController;
 use App\Http\Controllers\backend\setup\ExamTypeController;
 use App\Http\Controllers\Backend\Setup\FeeAmountController;
 use App\Http\Controllers\Backend\Student\ExamFeeController;
+use App\Http\Controllers\Backend\Report\MarkSheetController;
+use App\Http\Controllers\Backend\Account\OtherCostController;
 use App\Http\Controllers\Backend\Setup\DesignationController;
 use App\Http\Controllers\Backend\Setup\FeeCategoryController;
 use App\Http\Controllers\Backend\Setup\StudentYearController;
+use App\Http\Controllers\Backend\Account\StudentFeeController;
 use App\Http\Controllers\Backend\Setup\StudentClassController;
 use App\Http\Controllers\Backend\Setup\StudentGroupController;
 use App\Http\Controllers\Backend\Setup\StudentShiftController;
 use App\Http\Controllers\Backend\Student\MonthlyFeeController;
 use App\Http\Controllers\Backend\Student\StudentRegController;
+use App\Http\Controllers\Backend\Report\ResultReportController;
 use App\Http\Controllers\Backend\Setup\AssignSubjectController;
 use App\Http\Controllers\backend\setup\SchoolSubjectController;
 use App\Http\Controllers\backend\student\StudentRollController;
 use App\Http\Controllers\Backend\Employee\EmployeeRegController;
+use App\Http\Controllers\Backend\Account\AccountSalaryController;
 use App\Http\Controllers\Backend\employee\EmployeeLeaveController;
 use App\Http\Controllers\Backend\Employee\MonthlySalaryController;
 use App\Http\Controllers\Backend\Employee\EmployeeSalaryController;
+use App\Http\Controllers\Backend\Report\AttendanceReportController;
 use App\Http\Controllers\Backend\Student\RegistrationFeeController;
 use App\Http\Controllers\Backend\employee\EmployeeAttendanceController;
 
@@ -39,6 +46,12 @@ use App\Http\Controllers\Backend\employee\EmployeeAttendanceController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::group(['middleware' => 'prevent-back-history'],function(){
+
+
+
+
 
 Route::get('/', function () {
     return view('admin.login');
@@ -377,4 +390,77 @@ Route::middleware(['auth'])->group(function () {
     Route::get('student/marks/getStudents', [DefaultController::class, 'getStudents'])->name('student.marks.getStudents');
 
 
+
+    // Accounts Management All Routes
+    Route::prefix('accounts')->group(function () {
+
+        Route::get('student/fee/view', [StudentFeeController::class, 'view'])->name('student.fee.view');
+
+        Route::get('student/fee/add', [StudentFeeController::class, 'add'])->name('student.fee.add');
+
+        Route::get('account.fee.getStudent', [StudentFeeController::class, 'getStudent'])->name('account.fee.getStudent');
+
+
+        Route::post('student/fee/store', [StudentFeeController::class, 'store'])->name('student.fee.store');
+
+        // Employee Salary All Routes
+        Route::get('account/salary/view', [AccountSalaryController::class, 'view'])->name('account.salary.view');
+
+        Route::get('account/salary/add', [AccountSalaryController::class, 'add'])->name('account.salary.add');
+
+        Route::get('account/salary/getEmployee', [AccountSalaryController::class, 'getEmployee'])->name('account.salary.getEmployee');
+
+        Route::post('account/salary/store', [AccountSalaryController::class, 'store'])->name('account.salary.store');
+
+        // Other Cost All Routes
+        Route::get('other/cost/view', [OtherCostController::class, 'view'])->name('other.cost.view');
+
+        Route::get('other/cost/add', [OtherCostController::class, 'add'])->name('other.cost.add');
+
+        Route::post('other/cost/store', [OtherCostController::class, 'store'])->name('other.cost.store');
+
+        Route::get('other/cost/edit/{id}', [OtherCostController::class, 'edit'])->name('other.cost.edit');
+
+        Route::patch('other/cost/update/{id}', [OtherCostController::class, 'update'])->name('other.cost.update');
+
+    });
+
+    // Reports Management All Routes
+    Route::prefix('reports')->group(function () {
+
+        Route::get('monthly/profit/view', [ProfitController::class, 'monthlyProfitView'])->name('monthly.profit.view');
+
+        Route::get('monthly/profit/dateWise', [ProfitController::class, 'monthlyProfitDateWise'])->name('monthly.profit.dateWise');
+
+        Route::get('report/profit/pdf', [ProfitController::class, 'monthlyProfitPDF'])->name('report.profit.pdf');
+
+
+
+        // MarkSheet Generate View All Routes
+        Route::get('markSheet/generate/view', [MarkSheetController::class, 'view'])->name('markSheet.generate.view');
+
+        Route::get('markSheet/generate/get', [MarkSheetController::class, 'markSheetGet'])->name('report.markSheet.get');
+
+        // Attendance report All Routes
+        Route::get('attendance/report/view', [AttendanceReportController::class, 'view'])->name('attendance.report.view');
+
+        Route::get('report/attendance/get', [AttendanceReportController::class, 'get'])->name('report.attendance.get');
+
+
+
+        // Student Result All Routes
+        Route::get('student/result/view', [ResultReportController::class, 'view'])->name('student.result.view');
+
+        Route::get('report/student/result/get', [ResultReportController::class, 'get'])->name('report.student.result.get');
+
+
+        // Student ID Card All Routes
+        Route::get('student/IDCard/view', [ResultReportController::class, 'IDCardView'])->name('student.IDCard.view');
+
+        Route::get('student/IDCard/get', [ResultReportController::class, 'IDCardGet'])->name('report.student.IDCard.get');
+    });
+
+
 }); // End Of Middleware Authentication
+
+}); //prevent back history Middleware

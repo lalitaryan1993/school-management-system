@@ -132,31 +132,45 @@
             <li class="{{ $route == 'marks.entry.grade' ? 'active' : '' }}"><a href="{{ route('marks.entry.grade')}}"><i class="ti-more"></i>Marks Grade</a></li>
 
           </ul>
-</li>
+        </li>
 
-
-
-        <li class="header nav-small-cap">User Interface</li>
-
-        <li class="treeview">
+        <li class="treeview {{ ($prefix == '/accounts') ? 'active' : '' }}">
           <a href="#">
-            <i data-feather="grid"></i>
-            <span>Components</span>
+            <i data-feather="mail"></i> <span>Accounts Management</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="components_alerts.html"><i class="ti-more"></i>Alerts</a></li>
-            <li><a href="components_badges.html"><i class="ti-more"></i>Badge</a></li>
-            <li><a href="components_buttons.html"><i class="ti-more"></i>Buttons</a></li>
-            <li><a href="components_sliders.html"><i class="ti-more"></i>Sliders</a></li>
-            <li><a href="components_dropdown.html"><i class="ti-more"></i>Dropdown</a></li>
-            <li><a href="components_modals.html"><i class="ti-more"></i>Modal</a></li>
-            <li><a href="components_nestable.html"><i class="ti-more"></i>Nestable</a></li>
-            <li><a href="components_progress_bars.html"><i class="ti-more"></i>Progress Bars</a></li>
+            <li class="{{ $route == 'student.fee.view' ? 'active' : '' }}"><a href="{{ route('student.fee.view')}}"><i class="ti-more"></i>Student fee</a></li>
+            <li class="{{ $route == 'account.salary.view' ? 'active' : '' }}"><a href="{{ route('account.salary.view')}}"><i class="ti-more"></i>Employee salary</a></li>
+            <li class="{{ $route == 'other.cost.view' ? 'active' : '' }}"><a href="{{ route('other.cost.view')}}"><i class="ti-more"></i>Other Cost</a></li>
+
           </ul>
         </li>
+
+        <li class="treeview {{ ($prefix == '/report') ? 'active' : '' }}">
+            <a href="#">
+              <i data-feather="mail"></i> <span>Reports Management</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-right pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li class="{{ $route == 'monthly.profit.view' ? 'active' : '' }}"><a href="{{ route('monthly.profit.view')}}"><i class="ti-more"></i>Monthly-Yearly Profit</a></li>
+              <li class="{{ $route == 'markSheet.generate.view' ? 'active' : '' }}"><a href="{{ route('markSheet.generate.view')}}"><i class="ti-more"></i>Marksheet Generate</a></li>
+              <li class="{{ $route == 'attendance.report.view' ? 'active' : '' }}"><a href="{{ route('attendance.report.view')}}"><i class="ti-more"></i>Attendance Report</a></li>
+
+              <li class="{{ $route == 'student.result.view' ? 'active' : '' }}"><a href="{{ route('student.result.view')}}"><i class="ti-more"></i>Student Result</a></li>
+
+              <li class="{{ $route == 'student.IDCard.view' ? 'active' : '' }}"><a href="{{ route('student.IDCard.view')}}"><i class="ti-more"></i>Student IDCard</a></li>
+
+            </ul>
+          </li>
+
+        <li class="header nav-small-cap">User Interface</li>
+
+
 
 
 

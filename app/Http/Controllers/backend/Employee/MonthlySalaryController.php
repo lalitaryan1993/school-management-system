@@ -30,7 +30,7 @@ class MonthlySalaryController extends Controller
         $data = EmployeeAttendance::select('employee_id')->groupBy('employee_id')->with(['user'])->where($where)->get();
         // dd($data);
         $html['thsource'] = '<th>SL</th>';
-        $html['thsource'] .= '<ID>Employee Name</th>';
+        $html['thsource'] .= '<th>Employee Name</th>';
         $html['thsource'] .= '<th>Basic Salary</th>';
         $html['thsource'] .= '<th>Salary This Month</th>';
         $html['thsource'] .= '<th>Action</th>';
